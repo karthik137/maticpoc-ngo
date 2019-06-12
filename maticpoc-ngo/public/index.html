@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Home - Brand</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/Team-with-rotating-cards.css">
+
+ 
+</head>
+
+<body id="page-top">
+    <section class="cta" style="background-image:url('assets/img/Graduation.jpg');">
+        <div class="cta-content">
+            <div class="container">
+                <h2 style="font-size: 40px;">"Education is the most powerful weapon which you can use to change the world" - Nelson Mandela.<br></h2><a class="btn btn-outline-warning btn-xl js-scroll-trigger" role="button" href="#contact" style="background-color: rgba(255,193,7,0);">LET'S CHANGE THE WORLD!</a></div>
+        </div>
+        <div class="overlay">
+            <nav class="navbar navbar-light navbar-expand-lg fixed-top" id="mainNav" style="background-color: rgba(228,191,191,0);">
+                <div class="container"><a class="navbar-brand js-scroll-trigger" href="#page-top" style="color: rgb(254,254,254);font-family: Catamaran, sans-serif;font-weight:bolder;">The GodParent Project</a><button class="navbar-toggler float-right" data-toggle="collapse"
+                        data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
+                    <div class="collapse navbar-collapse" id="navbarResponsive">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="#download">HOME</a></li>
+                            <li class="nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="#" id="loginAsDonor">LOGIN</a></li>
+                            <li class="nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="#contact">SIGNUP</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </section>
+    <footer>
+        <div class="container" >
+            <p>©&nbsp;Brand 2018. All Rights Reserved.</p>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="#">Privacy</a></li>
+                <li class="list-inline-item"><a href="#">Terms</a></li>
+                <li class="list-inline-item"><a href="#">FAQ</a></li>
+            </ul>
+        </div>
+    </footer>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script src="assets/js/new-age.js"></script>
+
+    <script src="assets/js/uport-connect.js"></script>
+    
+	<script src="https://cdn.jsdelivr.net/npm/crypto-js@3.1.9-1/crypto-js.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@0.20.6/dist/web3.min.js"></script>
+        
+
+        <script>
+
+               
+        const Connect = window.uportconnect
+
+
+
+        // Initialize uport-connect object
+
+        const uport = new Connect('NGO',keypairPvt={ did: 'did:ethr:0x6951D1857B854cDe0ab09fE00B3E95f51CCC5454',privateKey:'79bc6b2c99cb99af565bd6498a0d944e455fd91baf46c5d965a29397b83de678'});
+
+
+        $('#loginAsDonor').click(function(){
+            uport.requestDisclosure({   // retrive did
+            requested: ['name','email'], 
+            accountType:"keypair",
+            notifications: true
+            });
+
+               uport.onResponse('disclosureReq').then(res => {
+           // $('#myModal').modal('show');
+                const did = res.payload.did
+                json = JSON.stringify(res.payload);
+
+                console.log(res.payload)
+
+                var address=res.payload.address;
+                window.location.href = "index-1.html";
+
+               });
+        });
+
+
+            </script>
+</body>
+
+</html>

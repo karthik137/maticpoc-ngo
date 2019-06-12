@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>IDauth</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/Grid-and-List-view-V10-1.css">
+    <link rel="stylesheet" href="assets/css/Grid-and-List-view-V10.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+
+    <script src="./uport-connect.js"></script>
+    
+	<script src="https://cdn.jsdelivr.net/npm/crypto-js@3.1.9-1/crypto-js.js"></script>
+	    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@0.20.6/dist/web3.min.js"></script>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-md navbar-dark" style="background-color:#205493;">
+  <a class="navbar-brand" href="#">ID Issuing Authority</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav ml-auto">
+      
+      <li class="nav-item">
+        <button type="button" class="btn btn-link" style="color:white;" id="nameValue"></button>
+      </li>
+
+      <li class="nav-item">
+            <button type="button" class="btn btn-link" style="color:white;" id="logOut">LogOut</button>
+          </li>
+       
+    </ul>
+  </div>  
+</nav>
+<div style="margin-top:50px;margin-bottom:20px;margin-left:10px;">
+    <h3 style="font-weight:bold;">Your Proofs</h3>
+</div> 
+<div class="container">
+  
+    <ul class="nav nav-pills nav-justified" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="pill" href="#home">Proof Available</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="pill" href="#menu1">Abstract Proofs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="pill" href="#menu2">Issued Proofs</a>
+        </li>
+      </ul>
+    
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div id="home" class="container tab-pane active"><br>
+          <h3>Claims Available</h3>
+
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>SNo</th>
+                <th>Attribute</th>
+                <th>Value</th>
+                <th>Action</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>FirstName</td>
+                <td id="firstName"></td>
+                <td><button onclick="issueProof('FirstName')" class="btn btn-primary">Request</button></td>
+                <td id="firstNameIssued"></td>
+
+              </tr>
+
+              
+                <tr>
+                    <td>2</td>
+                    <td>LastName</td>
+                    <td id="lastName"></td>
+                    <td><button onclick="issueProof('LastName')" class="btn btn-primary">Request</button></td>
+                    <td id="lastNameIssued"></td>
+                </tr>
+
+                <tr>
+                    <td>3</td>
+                    <td>Age</td>
+                    <td id="age"></td>
+                    <td><button onclick="issueProof('Age')" class="btn btn-primary">Request</button></td>
+                    <td id="ageIssued"></td>
+
+
+                </tr>
+
+                <tr>
+                    <td>4</td>
+                    <td>Address</td>
+                    <td id="address"></td>
+                    <td><button onclick="issueProof('Address')" class="btn btn-primary">Request</button></td>
+                    <td id="addressIssued"></td>
+
+                </tr>
+
+                <tr>
+                    <td>5</td>
+                    <td>Street</td>
+                    <td id="street"></td>
+                    <td><button onclick="issueProof('Address')" class="btn btn-primary">Request</button></td>
+                    <td id="streetIssued"></td>
+
+                </tr>
+
+
+                <tr>
+                    <td>6</td>
+                    <td>City</td>
+                    <td id="city"></td>
+                    <td><button onclick="issueProof('City')" class="btn btn-primary">Request</button></td>
+                    <td id="cityIssued"></td>
+                </tr>
+
+                <tr>
+                    <td>7</td>
+                    <td>State</td>
+                    <td id="state"></td>
+                    <td><button onclick="issueProof('State')" class="btn btn-primary">Request</button></td>
+                    <td id="stateIssued"></td>
+                </tr>
+
+                <tr>
+                    <td>8</td>
+                    <td>Country</td>
+                    <td id="country"></td>
+                    <td><button onclick="issueProof('Country')" class="btn btn-primary">Request</button></td>
+                    <td id="countryIssued"></td>
+                </tr>
+
+            </tbody>
+          </table>
+        </div>
+        <div id="menu1" class="container tab-pane fade"><br>
+          <h3>Abstract Claims</h3>
+          
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>SNo</th>
+                <th>Attribute</th>
+                <th>Value</th>
+                <th>Action</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+
+                    <tr>
+                            <td>1</td>
+                            <td>Age Above 16</td>
+                            <td id="ageAbove16"></td>
+                            <td><button onclick="issueProof('ageAbove16')" class="btn btn-primary">Request</button></td>
+                            <td id="ageAbove16Issued"></td>
+            
+                          </tr>
+              <tr>
+                <td>2</td>
+                <td>Age Above 18</td>
+                <td id="ageAbove18"></td>
+                <td><button onclick="issueProof('ageAbove18')" class="btn btn-primary">Request</button></td>
+                <td id="ageAbove18Issued"></td>
+
+              </tr>
+
+              <tr>
+                <td>3</td>
+                <td>Age Above 21</td>
+                <td id="ageAbove21"></td>
+                <td><button onclick="issueProof('ageAbove21')" class="btn btn-primary">Request</button></td>
+                <td id="ageAbove21Issued"></td>
+
+              </tr>
+
+              <tr>
+                <td>4</td>
+                <td>Age Above 65</td>
+                <td id="ageAbove65"></td>
+                <td><button onclick="issueProof('ageAbove65')" class="btn btn-primary">Request</button></td>
+                <td id="ageAbove65Issued"></td>
+
+              </tr>
+
+              <tr>
+                <td>5</td>
+                <td>Hotel Entry</td>
+                <td id="hotelEntry"></td>
+                <td><button onclick="issueProof('hotelEntry')" class="btn btn-primary">Request</button></td>
+                <td id="hotelEntryIssued"></td>
+
+              </tr>
+
+              <tr>
+                    <td>6</td>
+                    <td>Eligibility to Vote</td>
+                    <td id="eligibilityToVote"></td>
+                    <td><button onclick="issueProof('eligibilityToVote')" class="btn btn-primary">Request</button></td>
+                    <td id="eligibilityToVoteIssued"></td>
+    
+                  </tr>
+              </tbody>
+              </table>
+        </div>
+        <div id="menu2" class="container tab-pane fade"><br>
+          <h3>Issued Claims</h3>
+          <table class="table table-bordered" id="issuedClaimData">
+                <thead>
+                  <tr>
+                    <th>SNo</th>
+                    <th>Attribute</th>
+                    <th>Value</th>
+                    <th>Timestamp</th>
+                    <th>TxID</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                    </tbody>
+
+</table>
+
+        </div>
+      </div>
+    
+      
+  
+
+
+
+</div> 
+
+
+
+<div class="modal" id="txModal">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+    
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">Transaction Details</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+    
+          <!-- Modal body -->
+          <div class="modal-body">
+            <table class="table table-bordered">
+              <tr>
+                <td>Tx ID</td>
+                <td id="txId"></td>
+                </tr>
+                <tr>
+                    <td>Event Name</td>
+                    <td id="txEventName"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Block Number</td>
+                        <td id="txBlockNumber"></td>
+                        </tr>
+
+                    <tr>
+                          <td>Time Stamp</td>
+                          <td id="txTimeStamp"></td>
+                          </tr>
+            </table>
+          </div>
+    
+          <!-- Modal footer -->
+         
+        </div>
+      </div>
+      </div>
+<footer class="page-footer font-small" style="background-color:#205493;color:white;margin-top:20px;" id="customFooter">
+
+   
+   
+    
+    
+    
+  </footer>
+     
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/Grid-and-List-view-V10.js"></script>
+
+    <script type="text/javascript">
+        //////////////////////////////
+        //  Configure connect object
+        /////////////////////////////
+        const Connect = window.uportconnect
+
+        // get Customer's Name from localStorage
+        var custName=localStorage.getItem("CustName");
+        document.getElementById("nameValue").innerHTML = 'Welcome '+custName; 
+
+        // get Customer's DID from localStorage
+
+        var didAddress=localStorage.getItem("custDID");
+
+        // Initialize uport-connect object
+
+        const uport = new Connect('GovtAuthority',keypairPvt={ did: 'did:ethr:0x3de1aae544f4da936fc68b0e198a7c4befdf7e6a',privateKey:'014A1CB80D66E11DD47F494DEE3A3841263CD57932DA34926DC8687783263D2A'});
+ 
+        $('#logOut').click(function(){
+        localStorage.clear();
+        window.location.href="index.html"
+        });
+
+        // Issue proof for requested Parameter
+
+        function issueProof(parametervalue) {
+            
+            // Get Value for requested Parameter from localstorage
+
+            var requestValue=localStorage.getItem(parametervalue);
+            var didAddress=localStorage.getItem("custDID");
+            var vardata='';
+            var hash='';
+            if(parametervalue=='FirstName'){
+            
+            // Create Proof using Data
+
+            vardata={'FirstName' : {'FirstName' : requestValue}}
+            hash = CryptoJS.SHA256(vardata).toString();
+            
+
+            $.ajax({
+                            dataType:'json',
+                            contentType:'application/json;charset=UTF-8',
+                            url:'/setClaim?hash='+hash+'&didAddress='+didAddress+"&claimName=FirstName",
+                            type:"POST",
+                            async:false,
+                            success:function(result){
+                                return result;
+                                
+                            }
+
+                        }).then(function(data){
+
+                            txId=data.txId;
+                            // Append txId to proof and send it to User
+
+                            uport.sendVerification({
+                                claim: {'FirstName' : {'FirstName' : requestValue, 'txId':txId}},
+                                sub:'did:ethr:'+didAddress,
+                            }).then(
+                    
+                                document.getElementById("firstNameIssued").innerHTML = 'Claim Issued'
+                            )
+
+                    });
+                
+            }else if(parametervalue=='LastName'){
+
+            vardata={'LastName' : {'LastName' : requestValue}}
+            hash = CryptoJS.SHA256(vardata).toString();
+
+
+
+            $.ajax({
+                            dataType:'json',
+                            contentType:'application/json;charset=UTF-8',
+                            url:'/setClaim?hash='+hash+'&didAddress='+didAddress+"&claimName=LastName",
+                            type:"POST",
+                            async:false,
+                            success:function(result){
+                                return result;
+                                
+                            }
+
+                        }).then(function(data){
+                            txId=data.txId;
+                            uport.sendVerification({
+                                claim: {'LastName' : {'LastName' : requestValue, 'txId':txId}},
+                                sub:'did:ethr:'+didAddress,
+                            }).then(
+                    
+                            document.getElementById("lastNameIssued").innerHTML = 'Claim Issued'
+                            )
+
+
+                    });
+            
+
+            }else if(parametervalue=='govtID'){
+
+            vardata={'govtID' : {'govtID' : requestValue}}
+            hash = CryptoJS.SHA256(vardata).toString();
+
+
+                $.ajax({
+                            dataType:'json',
+                            contentType:'application/json;charset=UTF-8',
+                            url:'/setClaim?hash='+hash+'&didAddress='+didAddress+"&claimName=govtID",
+                            type:"POST",
+                            async:false,
+                            success:function(result){
+                                return result;
+                                
+                            }
+
+                        }).then(function(data){
+                            txId=data.txId;
+                            uport.sendVerification({
+                                claim: {'govtID' : {'govtID' : requestValue, 'txId':txId}},
+                                sub:'did:ethr:'+didAddress,
+                        })
+
+            });
+
+                
+
+            }else if(parametervalue=='Age'){
+
+            vardata={'Age' : {'Age' : requestValue}}
+            hash = CryptoJS.SHA256(vardata).toString();
+
+
+                $.ajax({
+                            dataType:'json',
+                            contentType:'application/json;charset=UTF-8',
+                            url:'/setClaim?hash='+hash+'&didAddress='+didAddress+"&claimName=Age",
+                            type:"POST",
+                            async:false,
+                            success:function(result){
+                                //var txId=result.txId
+                                return result;
+                                
+                            }
+
+                        }).then(function(data){
+                            txId=data.txId;
+                            uport.sendVerification({
+                                claim: {'Age' : {'Age' : requestValue, 'txId':txId}},
+                                sub:'did:ethr:'+didAddress,
+                            }).then(
+                    
+                            document.getElementById("ageIssued").innerHTML = 'Claim Issued'
+                            )
+
+            });
+
+
+            }else if(parametervalue=="eligibilityToVote"){
+                vardata={'eligibilityToVote' : {'eligibilityToVote' : requestValue}}
+            hash = CryptoJS.SHA256(vardata).toString();
+               
+
+           $.ajax({
+                            dataType:'json',
+                            contentType:'application/json;charset=UTF-8',
+                            url:'/setClaim?hash='+hash+'&didAddress='+didAddress+"&claimName=eligibilityToVote",
+                            type:"POST",
+                            async:false,
+                            success:function(result){
+                                return result;
+                                
+                            }
+
+                        }).then(function(data){
+                            txId=data.txId;
+                            uport.sendVerification({
+                                claim: {'eligibilityToVote' : {'eligibilityToVote' : requestValue, 'txId':txId}},
+                                sub:'did:ethr:'+didAddress,
+                            }).then(
+                    
+                            document.getElementById("eligibilityToVoteIssued").innerHTML = 'Claim Issued'
+                            )
+
+            });
+
+            }else if(parametervalue=='Address'){
+
+            vardata={'Address' : {'Address' : requestValue}}
+            hash = CryptoJS.SHA256(vardata).toString();
+
+            $.ajax({
+                            dataType:'json',
+                            contentType:'application/json;charset=UTF-8',
+                            url:'/setClaim?hash='+hash+'&didAddress='+didAddress+"&claimName=Address",
+                            type:"POST",
+                            async:false,
+                            success:function(result){
+                                return result;
+                                
+                            }
+
+                        }).then(function(data){
+                            txId=data.txId;
+                            uport.sendVerification({
+                                claim: {'Address' : {'Address' : requestValue, 'txId':txId}},
+                                sub:'did:ethr:'+didAddress,
+                            }).then(
+                    
+                            document.getElementById("addressIssued").innerHTML = 'Claim Issued'
+                            )
+
+            });
+            
+
+
+            }else if(parametervalue=='Street'){
+
+            vardata={'Street' : {'Street' : requestValue}}
+            hash = CryptoJS.SHA256(vardata).toString();
+
+
+            $.ajax({
+                            dataType:'json',
+                            contentType:'application/json;charset=UTF-8',
+                            url:'/setClaim?hash='+hash+'&didAddress='+didAddress+"&claimName=Street",
+                            type:"POST",
+                            async:false,
+                            success:function(result){
+                                return result;
+                                
+                            }
+
+                        }).then(function(data){
+                            txId=data.txId;
+                            uport.sendVerification({
+                                claim: {'Street' : {'Street' : requestValue, 'txId':txId}},
+                                sub:'did:ethr:'+didAddress,
+                            }).then(
+                    
+                            document.getElementById("streetIssued").innerHTML = 'Claim Issued'
+                )
+            });
+            
+                    
+
+            }else if(parametervalue=='City'){
+
+
+            vardata={'City' : {'City' : requestValue}}
+            hash = CryptoJS.SHA256(vardata).toString();
+            $.ajax({
+                            dataType:'json',
+                            contentType:'application/json;charset=UTF-8',
+                            url:'/setClaim?hash='+hash+'&didAddress='+didAddress+"&claimName=City",
+                            type:"POST",
+                            async:false,
+                            success:function(result){
+                                return result;
+                                
+                            }
+
+                        }).then(function(data){
+                            txId=data.txId;
+                            uport.sendVerification({
+                                claim: {'City' : {'City' : requestValue, 'txId':txId}},
+                                sub:'did:ethr:'+didAddress,
+                                }).then(
+                    
+                                document.getElementById("cityIssued").innerHTML = 'Claim Issued'
+                                )
+            });
+                    
+
+            }else if(parametervalue=='State'){
+
+
+            vardata= {'State' : {'State' : requestValue}}
+            hash = CryptoJS.SHA256(vardata).toString();
+
+            $.ajax({
+                            dataType:'json',
+                            contentType:'application/json;charset=UTF-8',
+                            url:'/setClaim?hash='+hash+'&didAddress='+didAddress+"&claimName=State",
+                            type:"POST",
+                            async:false,
+                            success:function(result){
+                                return result;
+                                
+                            }
+
+                        }).then(function(data){
+                            txId=data.txId;
+                            uport.sendVerification({
+                                claim: {'State' : {'State' : requestValue, 'txId':txId}},
+                                sub:'did:ethr:'+didAddress,
+                            }).then(
+                    
+                            document.getElementById("stateIssued").innerHTML = 'Claim Issued'
+                            )
+            });
+
+
+            }else if(parametervalue=='Country'){
+
+            vardata= {'Country' : {'Country' : requestValue}}
+            hash = CryptoJS.SHA256(vardata).toString();
+
+            $.ajax({
+                            dataType:'json',
+                            contentType:'application/json;charset=UTF-8',
+                            url:'/setClaim?hash='+hash+'&didAddress='+didAddress+"&claimName=State",
+                            type:"POST",
+                            async:false,
+                            success:function(result){
+                                return result;
+                                
+                            }
+
+                        }).then(function(data){
+                            txId=data.txId;
+                            uport.sendVerification({
+                                claim: {'Country' : {'Country' : requestValue, 'txId':txId}},
+                                sub:'did:ethr:'+didAddress,
+                            }).then(
+                    
+                            document.getElementById("countryIssued").innerHTML = 'Claim Issued'
+                        )
+            });
+
+            }else if(parametervalue=='ageAbove65'){
+                var ts = new Date();
+            vardata= {'ageAbove65' : {'ageAbove65' : requestValue,dateOfIssuance:ts.toString()}}
+            hash = CryptoJS.SHA256(vardata).toString();
+
+            $.ajax({
+                            dataType:'json',
+                            contentType:'application/json;charset=UTF-8',
+                            url:'/setClaim?hash='+hash+'&didAddress='+didAddress+"&claimName=ageAbove65",
+                            type:"POST",
+                            async:false,
+                            success:function(result){
+                                return result;
+                                
+                            }
+
+                        }).then(function(data){
+                            txId=data.txId;
+                            uport.sendVerification({
+                                claim: {'ageAbove65' : {'ageAbove65' : requestValue,dateOfIssuance:ts.toString()}},
+                                sub:'did:ethr:'+didAddress,
+                            }).then(
+                    
+                            document.getElementById("ageAbove65Issued").innerHTML = 'Claim Issued'
+                        )
+            });
+            }else if(parametervalue=='hotelEntry'){
+                // Build Hotel Entry Proof using following Data. Note that the Hotel Entry Proof deoesn't give away the actual age or govt ID number of the user.
+                var ts = new Date();
+                var FirstName=localStorage.getItem("FirstName");
+                var LastName=localStorage.getItem("LastName");
+                var Address=localStorage.getItem("Address");
+                var Country=localStorage.getItem("Country");
+                var validGovtID=localStorage.getItem("validGovtID");
+                var ageAbove18=localStorage.getItem("ageAbove18");
+                var hotelEntry=localStorage.getItem("hotelEntry");
+
+
+
+
+            vardata= {'hotelEntry' : {"hotelEntry":hotelEntry,'FirstName' : FirstName,dateOfIssuance:ts.toString(),'ageAbove18':ageAbove18,'LastName':LastName,'Address':Address,'Nationality':Country,'validGovtID':validGovtID}}
+            hash = CryptoJS.SHA256(vardata).toString();
+
+            $.ajax({
+                            dataType:'json',
+                            contentType:'application/json;charset=UTF-8',
+                            url:'/setClaim?hash='+hash+'&didAddress='+didAddress+"&claimName=hotelEntry",
+                            type:"POST",
+                            async:false,
+                            success:function(result){
+                                //var txId=result.txId
+                                return result;
+                                
+                            }
+
+                        }).then(function(data){
+                            txId=data.txId;
+                            uport.sendVerification({
+                                claim: {'hotelEntry' : {"hotelEntry":hotelEntry,'FirstName' : FirstName,dateOfIssuance:ts.toString(),'ageAbove18':ageAbove18,'LastName':LastName,'Address':Address,'Nationality':Country,'validGovtID':validGovtID,'dateOfIssuance':ts.toString(),'txId':txId}},
+                                sub:'did:ethr:'+didAddress,
+                            }).then(
+                    
+                            document.getElementById("hotelEntryIssued").innerHTML = 'Claim Issued'
+                        )
+            });
+            }else if(parametervalue=='ageAbove18'){
+            var ts = new Date();
+            vardata= {'ageAbove18' : {'ageAbove18' : requestValue,dateOfIssuance:ts.toString()}}
+            hash = CryptoJS.SHA256(vardata).toString();
+
+            $.ajax({
+                            dataType:'json',
+                            contentType:'application/json;charset=UTF-8',
+                            url:'/setClaim?hash='+hash+'&didAddress='+didAddress+"&claimName=ageAbove18",
+                            type:"POST",
+                            async:false,
+                            success:function(result){
+                                //var txId=result.txId
+                                return result;
+                                
+                            }
+
+                        }).then(function(data){
+                            txId=data.txId;
+                            uport.sendVerification({
+                                claim: {'ageAbove18' : {'ageAbove18' : requestValue,dateOfIssuance:ts.toString(),'txId':txId}},
+                                sub:'did:ethr:'+didAddress,
+                            }).then(
+                    
+                            document.getElementById("ageAbove18Issued").innerHTML = 'Claim Issued'
+                        )
+            });
+            }else if(parametervalue=='ageAbove16'){
+                var ts = new Date();
+            vardata= {'ageAbove16' : {'ageAbove16' : requestValue,dateOfIssuance:ts.toString()}}
+            hash = CryptoJS.SHA256(vardata).toString();
+
+            $.ajax({
+                            dataType:'json',
+                            contentType:'application/json;charset=UTF-8',
+                            url:'/setClaim?hash='+hash+'&didAddress='+didAddress+"&claimName=ageAbove16",
+                            type:"POST",
+                            async:false,
+                            success:function(result){
+                                //var txId=result.txId
+                                return result;
+                                
+                            }
+
+                        }).then(function(data){
+                            txId=data.txId;
+                            uport.sendVerification({
+                                claim: {'ageAbove16' : {'ageAbove16' : requestValue,dateOfIssuance:ts.toString(),'txId':txId}},
+                                sub:'did:ethr:'+didAddress,
+                            }).then(
+                    
+                            document.getElementById("ageAbove16Issued").innerHTML = 'Claim Issued'
+                        )
+            });
+            }else if(parametervalue=='ageAbove21'){
+                var ts = new Date();
+            vardata= {'ageAbove21' : {'ageAbove21' : requestValue,dateOfIssuance:ts.toString()}}
+            hash = CryptoJS.SHA256(vardata).toString();
+
+            $.ajax({
+                            dataType:'json',
+                            contentType:'application/json;charset=UTF-8',
+                            url:'/setClaim?hash='+hash+'&didAddress='+didAddress+"&claimName=ageAbove21",
+                            type:"POST",
+                            async:false,
+                            success:function(result){
+                                //var txId=result.txId
+                                return result;
+                                
+                            }
+
+                        }).then(function(data){
+                            txId=data.txId;
+                            uport.sendVerification({
+                                claim: {'ageAbove21' : {'ageAbove21' : requestValue,dateOfIssuance:ts.toString(),'txId':txId}},
+                                sub:'did:ethr:'+didAddress,
+                            }).then(
+                    
+                            document.getElementById("ageAbove21Issued").innerHTML = 'Claim Issued'
+                        )
+            });
+            }
+
+        }
+
+
+
+
+         $.get("/detailByDid?did="+didAddress, function(datafromDB){
+            console.log("Printing result "+JSON.stringify(datafromDB))
+            var govtID=datafromDB.data.govtID;
+            var FirstName=datafromDB.data.FirstName;
+            var LastName=datafromDB.data.LastName;
+            var Age=datafromDB.data.Age;
+            var Address=datafromDB.data.Address;
+            var Street=datafromDB.data.Street;
+
+            var City=datafromDB.data.City;
+            var State=datafromDB.data.State;
+
+            var Country=datafromDB.data.Country;
+
+            document.getElementById("firstName").innerHTML = FirstName; 
+
+            document.getElementById("lastName").innerHTML = LastName; 
+            document.getElementById("age").innerHTML = Age; 
+            
+            //check if GovtID of the user is empty. If not set variable validGovtID as true.
+            if(govtID!=""){
+                localStorage.setItem("validGovtID",'true');
+
+            }else{
+                localStorage.setItem("validGovtID",'false');
+            }
+
+            //check if Age of the user is above 18. If so,set ageAbove18 as true.
+
+            if(Age>18){
+                document.getElementById("ageAbove18").innerHTML = 'true'; 
+                localStorage.setItem("ageAbove18",'true');
+
+            }else{
+                document.getElementById("ageAbove18").innerHTML = 'false'; 
+                localStorage.setItem("ageAbove18",'false');
+            }
+        
+            //check if Age of the user is above 16. If so,set ageAbove16 as true.
+
+            if(Age>16){
+                document.getElementById("ageAbove16").innerHTML = 'true'; 
+                localStorage.setItem("ageAbove16",'true');
+
+            }else{
+                document.getElementById("ageAbove16").innerHTML = 'false'; 
+                localStorage.setItem("ageAbove16",'false');
+            }
+
+            //check if Age of the user is above 21. If so,set ageAbove21 as true.
+
+            if(Age>21){
+                document.getElementById("ageAbove21").innerHTML = 'true'; 
+                localStorage.setItem("ageAbove21",'true');
+            }else{
+                document.getElementById("ageAbove21").innerHTML = 'false';
+                localStorage.setItem("ageAbove21",'false'); 
+            }
+           
+           //check if Age of the user is above 65. If so,set ageAbove65 as true.
+
+            if(Age>65){
+                document.getElementById("ageAbove65").innerHTML = 'true'; 
+                localStorage.setItem("ageAbove65",'true'); 
+            }else{
+                document.getElementById("ageAbove65").innerHTML = 'false'; 
+                localStorage.setItem("ageAbove65",'false'); 
+            }
+
+
+            // If the user's age is above 18,FirstName,Address and Govt ID are empty and if country is USA . Set hotelEntry as eligible is values satisfy condititions.
+            if(Age>18 && FirstName!="" && Address!="" && Country=="United States of America" &&govtID!=""){
+                document.getElementById("hotelEntry").innerHTML = 'eligible'; 
+                document.getElementById("eligibilityToVote").innerHTML = 'eligible'; 
+                
+                localStorage.setItem("hotelEntry",'eligible');
+                localStorage.setItem("eligibilityToVote",'eligible');
+                
+            }else{
+                document.getElementById("hotelEntry").innerHTML = 'ineligible'; 
+                localStorage.setItem("hotelEntry",'ineligible');
+                localStorage.setItem("eligibilityToVote",'ineligible');
+
+                
+            }
+              
+                document.getElementById("address").innerHTML = Address; 
+
+                document.getElementById("street").innerHTML = Street; 
+                document.getElementById("city").innerHTML = City; 
+
+                document.getElementById("state").innerHTML = State; 
+
+                document.getElementById("country").innerHTML = Country; 
+
+                
+
+                localStorage.setItem("govtID",govtID);
+                localStorage.setItem("FirstName",FirstName);
+
+
+                localStorage.setItem("LastName",LastName);
+
+                localStorage.setItem("Age",Age);
+
+                localStorage.setItem("Address",Address);
+
+                localStorage.setItem("Street",Street);
+
+                localStorage.setItem("City",City);
+
+
+                localStorage.setItem("State",State);
+
+
+                localStorage.setItem("Country",Country);
+
+
+
+
+
+            }).then(function(){
+        
+        // Get Claims issued for the user
+        
+        $.get("/getClaimStatusForDid?did="+didAddress, function(record){
+
+                $('#issuedClaimData tbody').empty();
+                
+                var index='';
+                
+                $.each(record.data,function(i,item){
+                    var index=i+1; 
+                    var claimName=item.claimName;
+                    var value=item.value;
+
+                    var timestamp=item.timestamp;
+                    var txId=item.txId;
+                    txId=txId.toString();
+
+                    var a = new Date(timestamp * 1000);
+                    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                    var year = a.getFullYear();
+                    var month = months[a.getMonth()];
+                    var date = a.getDate();
+                    var hour = a.getHours();
+                    var min = a.getMinutes();
+                    var sec = a.getSeconds();
+                    var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+                    
+                    // Display Status as issued if value corresponding to Claim Name is issued
+
+                    if(claimName=="FirstName" && value=="issued"){
+                        document.getElementById("firstNameIssued").innerHTML = 'Claim Issued'; 
+                        var FirstName=localStorage.getItem("FirstName");
+                        '<a href=# data-toggle="tooltip"  onclick=openTxModal("'+txId+'")  title='+item.txId+'>'+item.txId.substr(0,20)+'...'+'</a>'
+                        $("#issuedClaimData").append("<tr><td>"+index+"</td><td>"+claimName+"</td><td>"+FirstName+"</td><td>"+time+"</td><td><a href=# data-toggle='tooltip'  onclick=openTxModal('"+txId+"')  title="+txId+">"+item.txId.substr(0,20)+"..."+"</a></td></tr>");
+
+                    }else if(claimName=="LastName" && value=="issued"){
+                        var LastName=localStorage.getItem("LastName");
+
+                        document.getElementById("lastNameIssued").innerHTML = 'Claim Issued'; 
+                        $("#issuedClaimData").append("<tr><td>"+index+"</td><td>"+claimName+"</td><td>"+LastName+"</td><td>"+time+"</td><td><a href=# data-toggle='tooltip'  onclick=openTxModal('"+txId+"')  title="+txId+">"+item.txId.substr(0,20)+"..."+"</a></td></tr>");
+
+
+
+                    }else if (claimName=="Age" && value=="issued"){
+                        var Age=localStorage.getItem("Age");
+                        document.getElementById("ageIssued").innerHTML = 'Claim Issued'; 
+                        $("#issuedClaimData").append("<tr><td>"+index+"</td><td>"+claimName+"</td><td>"+Age+"</td><td>"+time+"</td><td><a href=# data-toggle='tooltip'  onclick=openTxModal('"+txId+"')  title="+txId+">"+item.txId.substr(0,20)+"..."+"</a></td></tr>");
+
+
+                     }
+                    else if (claimName=="GovtAuthorityLoginID" && value=="issued"){
+                        $("#issuedClaimData").append("<tr><td>"+index+"</td><td>"+claimName+"</td><td></td><td>"+time+"</td><td><a href=# data-toggle='tooltip'  onclick=openTxModal('"+txId+"')  title="+txId+">"+item.txId.substr(0,20)+"..."+"</a></td></tr>");
+
+
+
+
+                    }
+                    else if (claimName=="Address" && value=="issued"){
+                        var Address=localStorage.getItem("Address");
+
+                        document.getElementById("addressIssued").innerHTML = 'Claim Issued'; 
+                        $("#issuedClaimData").append("<tr><td>"+index+"</td><td>"+claimName+"</td><td>"+Address+"</td><td>"+time+"</td><td><a href=# data-toggle='tooltip'  onclick=openTxModal('"+txId+"')  title="+txId+">"+item.txId.substr(0,20)+"..."+"</a></td></tr>");
+
+
+
+
+                    }else if (claimName=="Street" && value=="issued"){
+                        var Street=localStorage.getItem("Street");
+                        document.getElementById("streetIssued").innerHTML = 'Claim Issued'; 
+                        $("#issuedClaimData").append("<tr><td>"+index+"</td><td>"+claimName+"</td><td>"+Street+"</td><td>"+time+"</td><td><a href=# data-toggle='tooltip'  onclick=openTxModal('"+txId+"')  title="+txId+">"+item.txId.substr(0,20)+"..."+"</a></td></tr>");
+
+
+
+
+                    }else if (claimName=="City" && value=="issued"){
+                        var City=localStorage.getItem("City");
+
+                        document.getElementById("cityIssued").innerHTML = 'Claim Issued'; 
+                        $("#issuedClaimData").append("<tr><td>"+index+"</td><td>"+claimName+"</td><td>"+City+"</td><td>"+time+"</td><td><a href=# data-toggle='tooltip'  onclick=openTxModal('"+txId+"')  title="+txId+">"+item.txId.substr(0,20)+"..."+"</a></td></tr>");
+
+
+
+
+                    }else if (claimName=="State" && value=="issued"){
+                        var State=localStorage.getItem("State");
+                        document.getElementById("stateIssued").innerHTML = 'Claim Issued'; 
+                        $("#issuedClaimData").append("<tr><td>"+index+"</td><td>"+claimName+"</td><td>"+State+"</td><td>"+time+"</td><td><a href=# data-toggle='tooltip'  onclick=openTxModal('"+txId+"')  title="+txId+">"+item.txId.substr(0,20)+"..."+"</a></td></tr>");
+
+
+
+
+                    }else if (claimName=="hotelEntry" && value=="issued"){
+                        var hotelEntry=localStorage.getItem("hotelEntry");
+                        document.getElementById("hotelEntryIssued").innerHTML = 'Claim Issued'; 
+                        $("#issuedClaimData").append("<tr><td>"+index+"</td><td>"+claimName+"</td><td>"+hotelEntry+"</td><td>"+time+"</td><td><a href=# data-toggle='tooltip'  onclick=openTxModal('"+txId+"')  title="+txId+">"+item.txId.substr(0,20)+"..."+"</a></td></tr>");
+
+
+
+
+                    }else if (claimName=="Country" && value=="issued"){
+                        var Country=localStorage.getItem("Country");
+                        document.getElementById("countryIssued").innerHTML = 'Claim Issued'; 
+                        $("#issuedClaimData").append("<tr><td>"+index+"</td><td>"+claimName+"</td><td>"+Country+"</td><td>"+time+"</td><td><a href=# data-toggle='tooltip'  onclick=openTxModal('"+txId+"')  title="+txId+">"+item.txId.substr(0,20)+"..."+"</a></td></tr>");
+
+
+
+
+                    }else if (claimName=="ageAbove65" && value=="issued"){
+                        var ageAbove65=localStorage.getItem("ageAbove65");
+
+                        document.getElementById("ageAbove65Issued").innerHTML = 'Claim Issued'; 
+                        $("#issuedClaimData").append("<tr><td>"+index+"</td><td>"+claimName+"</td><td>"+ageAbove65+"</td><td>"+time+"</td><td><a href=# data-toggle='tooltip'  onclick=openTxModal('"+txId+"')  title="+txId+">"+item.txId.substr(0,20)+"..."+"</a></td></tr>");
+
+
+
+
+                    }else if (claimName=="ageAbove18" && value=="issued"){
+                        var ageAbove18=localStorage.getItem("ageAbove18");
+
+                        document.getElementById("ageAbove18Issued").innerHTML = 'Claim Issued'; 
+                        $("#issuedClaimData").append("<tr><td>"+index+"</td><td>"+claimName+"</td><td>"+ageAbove18+"</td><td>"+time+"</td><td><a href=# data-toggle='tooltip'  onclick=openTxModal('"+txId+"')  title="+txId+">"+item.txId.substr(0,20)+"..."+"</a></td></tr>");
+
+
+
+
+                    }else if (claimName=="ageAbove16" && value=="issued"){
+                        var ageAbove16=localStorage.getItem("ageAbove16");
+                        document.getElementById("ageAbove16Issued").innerHTML = 'Claim Issued'; 
+                        $("#issuedClaimData").append("<tr><td>"+index+"</td><td>"+claimName+"</td><td>"+ageAbove16+"</td><td>"+time+"</td><td><a href=# data-toggle='tooltip'  onclick=openTxModal('"+txId+"')  title="+txId+">"+item.txId.substr(0,20)+"..."+"</a></td></tr>");
+
+
+
+
+                    }else if (claimName=="ageAbove21" && value=="issued"){
+                        var ageAbove21=localStorage.getItem("ageAbove21");
+                        document.getElementById("ageAbove21Issued").innerHTML = 'Claim Issued'; 
+                        $("#issuedClaimData").append("<tr><td>"+index+"</td><td>"+claimName+"</td><td>"+ageAbove21+"</td><td>"+time+"</td><td><a href=# data-toggle='tooltip'  onclick=openTxModal('"+txId+"')  title="+txId+">"+item.txId.substr(0,20)+"..."+"</a></td></tr>");
+
+
+
+
+                    }else if(claimName=="eligibilityToVote" && value=="issued"){
+                        var LastName=localStorage.getItem("eligibilityToVote");
+
+                        document.getElementById("eligibilityToVoteIssued").innerHTML = 'Claim Issued'; 
+                        $("#issuedClaimData").append("<tr><td>"+index+"</td><td>"+claimName+"</td><td>"+LastName+"</td><td>"+time+"</td><td><a href=# data-toggle='tooltip'  onclick=openTxModal('"+txId+"')  title="+txId+">"+item.txId.substr(0,20)+"..."+"</a></td></tr>");
+
+
+
+                    }
+                })
+
+            })
+
+})
+        
+            setTimeout(function()
+            {                 $("#customFooter").append('<div class="footer-copyright text-center py-3">Developed by BlockchainCOE</div>');
+
+
+
+            }, 2000);
+
+
+    // get Details for a particular transaction ID.        
+    function openTxModal(txId){
+             document.getElementById("txId").innerHTML=txId;
+
+                 $.get("/getTransactionByTxId?txId="+txId, function(txDataResponse){
+                  document.getElementById("txEventName").innerHTML=txDataResponse.data.eventName;
+                  document.getElementById("txBlockNumber").innerHTML=txDataResponse.data.blockNumber;
+
+                   var timestamp=txDataResponse.data.timestamp;
+    
+    
+                  var a = new Date(timestamp * 1000);
+                  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                  var year = a.getFullYear();
+                  var month = months[a.getMonth()];
+                  var date = a.getDate();
+                  var hour = a.getHours();
+                  var min = a.getMinutes();
+                  var sec = a.getSeconds();
+                  var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
+                  document.getElementById("txTimeStamp").innerHTML=time;
+
+                  $('#txModal').modal();
+
+
+                 });
+           
+            }
+        
+
+
+       </script>
+</body>
+
+</html>
